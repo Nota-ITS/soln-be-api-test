@@ -2,6 +2,7 @@
 
 # 설정
 REPO_DIR="/home/itsdev/workspace/soln-be-api-test"  # Git 저장소 경로
+APP_DIR="/home/itsdev/workspace/soln-be-api-test/my_flask_app"  # Git 저장소 경로
 IMAGE_NAME="my_flask_app"      # Docker 이미지 이름
 CONTAINER_NAME="my_flask_app"  # Docker 컨테이너 이름
 SLACK_WEBHOOK_URL="https://hooks.slack.com/services/your/webhook/url"  # Slack Webhook URL
@@ -28,6 +29,7 @@ git pull origin develop || handle_error "Failed to pull from develop branch"
 
 # Docker 이미지 생성
 echo "Building Docker image..."
+cd $APP_DIR || handle_error "Failed to change app directory to $APP_DIR"
 docker build -t $IMAGE_NAME . || handle_error "Failed to build Docker image"
 
 # 기존 컨테이너 중지 및 삭제
