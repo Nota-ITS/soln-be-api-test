@@ -20,8 +20,8 @@ fi
 # Slack 알림 함수
 send_slack_notification() {
     local message=$1
-    # curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$message\"}" $SLACK_WEBHOOK_URL
-    echo -e "$message"
+    curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$message\"}" $SLACK_WEBHOOK_URL
+    # echo -e "$message"
 }
 
 # 오류 처리 함수
