@@ -11,7 +11,8 @@ SLACK_WEBHOOK_URL="https://hooks.slack.com/services/your/webhook/url"  # Slack W
 send_slack_notification() {
     # local message=$1
     # curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$message\"}" $SLACK_WEBHOOK_URL
-    echo "success!!"
+    local message=$1
+    echo $message
 }
 
 # 오류 처리 함수
