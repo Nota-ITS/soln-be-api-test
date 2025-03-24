@@ -35,8 +35,8 @@ docker build -t $IMAGE_NAME . || handle_error "Failed to build Docker image"
 
 # 기존 컨테이너 중지 및 삭제
 echo "Stopping and removing existing container..."
-docker stop $CONTAINER_NAME || handle_error "Failed to stop Docker container"
-docker rm $CONTAINER_NAME || handle_error "Failed to remove Docker container"
+docker stop $CONTAINER_NAME || true
+docker rm $CONTAINER_NAME || true
 
 # 새로운 컨테이너 실행
 echo "Starting new container..."
