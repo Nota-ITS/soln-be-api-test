@@ -11,7 +11,7 @@ if [ -z "$ENV_FILE" ]; then
 fi
 
 if [ -f "$ENV_FILE" ]; then
-    export $(cat "$ENV_FILE" | xargs)
+    export $(grep -v '^#' "$ENV_FILE" | xargs)
 else
     echo ".env file not found at $ENV_FILE!"
     exit 1
@@ -20,9 +20,8 @@ fi
 # Slack 알림 함수
 send_slack_notification() {
     local message=$1
-    curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$message\"}" $SLACK_WEBHOOK_URL
-    # local message=$1
-    # echo $message
+    # curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$message\"}" $SLACK_WEBHOOK_URL
+    echo -e "$message"
 }
 
 # 오류 처리 함수
@@ -32,11 +31,11 @@ handle_error() {
     exit 1
 }
 
-# Git develop 브랜치 pull
-echo "Pulling latest changes from develop branch..."
+# Git 브랜치 pull
+echo "Pulling latest changes from $BRANCH_NAME branch..."
 cd $REPO_DIR || handle_error "Failed to change directory to $REPO_DIR"
-git checkout develop || handle_error "Failed to checkout develop branch"
-git pull origin develop || handle_error "Failed to pull from develop branch"
+git checkout $BRANCH_NAME || handle_error "Failed to checkout $BRANCH_NAME branch"
+git pull origin $BRANCH_NAME || handle_error "Failed to pull from $BRANCH_NAME branch"
 
 # 현재 커밋 해시 가져오기
 commit_hash=$(git rev-parse HEAD)
