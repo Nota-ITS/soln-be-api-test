@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 설정
-REPO_DIR="https://github.com/Nota-ITS/soln-be-api-test.git"  # Git 저장소 경로
+REPO_DIR="~/workspace/soln-be-api-test"  # Git 저장소 경로
 IMAGE_NAME="my_flask_app"      # Docker 이미지 이름
 CONTAINER_NAME="my_flask_app"  # Docker 컨테이너 이름
 SLACK_WEBHOOK_URL="https://hooks.slack.com/services/your/webhook/url"  # Slack Webhook URL
